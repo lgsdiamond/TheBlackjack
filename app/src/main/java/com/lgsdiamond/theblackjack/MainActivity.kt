@@ -27,6 +27,9 @@ import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.runBlocking
 
 const val PREF_NAME = "TheBlackjackPref"
 
@@ -268,6 +271,38 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     //== TESTING ==
     private fun runTest() {
+        testAnim()
+    }
+
+    fun testAnim() {
+        async {
+            async {
+                btnTest.text = "START"
+            }
+            delay(1000)
+
+            async {
+                btnTest.bjAnimation(BJAnimation.BTN_EMPHASIS)
+            }
+
+            delay(1000)
+
+            async {
+                btnTest.text = "CHANGED"
+            }
+
+            delay(1000)
+
+            async {
+                btnTest.bjAnimation(BJAnimation.CARD_DEALING)
+            }
+
+            delay(1000)
+
+            async {
+                btnTest.text = "DONE"
+            }
+        }
     }
 
     private fun startGame() {
