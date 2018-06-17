@@ -2,10 +2,10 @@ package com.lgsdiamond.theblackjack
 
 import android.app.Fragment
 import android.content.Context
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceFragment
-import android.support.v4.content.ContextCompat
 import android.text.Spannable
 import android.text.SpannableString
 import android.view.LayoutInflater
@@ -47,7 +47,7 @@ class SettingFrag : PreferenceFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        view.setBackgroundColor(ContextCompat.getColor(gMainActivity, R.color.background_material_light))
+        view.setBackgroundColor(Color.WHITE)
         return view
     }
 

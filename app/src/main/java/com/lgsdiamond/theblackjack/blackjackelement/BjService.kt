@@ -11,7 +11,7 @@ import com.lgsdiamond.theblackjack.gContext
 import com.lgsdiamond.theblackjack.toToastShort
 
 /**
- * Created by lgsdi on 2018-03-14.
+ * Created by lgsdiamond on 2018-03-14.
  */
 
 enum class ServiceAction { INIT_SERVER,
@@ -133,7 +133,7 @@ class BjService : IntentService("Blackjack Service") {
     }
 }
 
-enum class IntentKey() { KEY_STAGE,
+enum class IntentKey { KEY_STAGE,
     KEY_MSG_STRING,
     KEY_SPLIT, KEY_DOUBLE_DOWN,
     KEY_DEALER_PLAYER, KEY_DEALER, KEY_PLAYER,

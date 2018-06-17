@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <com.lgsdiamond.theblackjack.BjTextView
-            android:id="@+id/textView"
+            android:id="@+id/nav_email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

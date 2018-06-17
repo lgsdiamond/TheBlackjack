@@ -27,7 +27,7 @@ enum class PlayerAction(val code: String) { UNKNOWN("?"), SURRENDER("R"),
 }
 
 /**
- * Created by lgsdi on 2015-12-26.
+ * Created by lgsdiamond on 2015-12-26.
  */
 internal typealias PlayerActionList = ArrayList<PlayerAction>
 

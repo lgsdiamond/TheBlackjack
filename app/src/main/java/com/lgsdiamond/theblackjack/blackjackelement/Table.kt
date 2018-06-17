@@ -200,7 +200,7 @@ class Table : ArrayList<Box>() {
                 for (pHand in boxHands) {
                     roundWin += (pHand.winAmount - pHand.bet)
                 }
-                box.better?.reflectRoundResult(roundWin, box.bet)
+                box.better.reflectRoundResult(roundWin, box.bet)
             }
         }
     }

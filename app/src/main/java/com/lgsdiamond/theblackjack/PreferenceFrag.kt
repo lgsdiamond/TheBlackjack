@@ -133,7 +133,7 @@ class PreferenceFrag : BjFragment() {
         }
     }
 
-    abstract inner class SpinnerTwoPref(title: String, private val spinDesc1: String, inPos1: Int,
+    abstract inner class SpinnerTwoPref(title: String, spinDesc1: String, inPos1: Int,
                                         private val spinDesc2: String, private var inPos2: Int,
                                         dataText1: Array<String>,
                                         private val dataText2: Array<String>)
@@ -338,7 +338,7 @@ class PreferenceFrag : BjFragment() {
                 val sPrefs = BjPrefCategory("Split Options")
 
                 val splitMaximum = object : SpinnerPref("Maximum number of split",
-                        "player can split upto",
+                        "player can split when",
                         when (Table.gameRule.maxSplitCount) {
                             1 -> 0
                             2 -> 1
@@ -708,14 +708,14 @@ class PreferenceFrag : BjFragment() {
             var pos = pString.indexOf('[', 0)
             while (pos >= 0) {
                 span.setSpan(ForegroundColorSpan(Color.BLUE), pos, pos + 1,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 pos = pString.indexOf('[', pos + 1)
             }
 
             pos = pString.indexOf(']', 0)
             while (pos >= 0) {
                 span.setSpan(ForegroundColorSpan(Color.BLUE), pos, pos + 1,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 pos = pString.indexOf(']', pos + 1)
             }
             return span

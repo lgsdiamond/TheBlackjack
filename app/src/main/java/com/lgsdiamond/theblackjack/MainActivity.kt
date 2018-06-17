@@ -32,8 +32,7 @@ const val PACKAGE_NAME = "com.lgsdiamond.theblackjack"
 const val PREF_NAME = "TheBlackjackPref"
 
 lateinit var gMainActivity: MainActivity
-val gContext: Context
-    get() = gMainActivity.applicationContext
+val gContext: Context by lazy { gMainActivity.applicationContext }
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
         BettingFrag.OnFragmentInteractionListener,
@@ -230,13 +229,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val winManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         winManager.defaultDisplay.getMetrics(sMetrics)
 
-        btnTest.setOnClickListener({ _: View ->
+        btnTest.setOnClickListener { _: View ->
             runTest()
-        })
+        }
 
-        btnStart.setOnClickListener({ _: View ->
+        btnStart.setOnClickListener { _: View ->
             startGame()
-        })
+        }
     }
 
     private fun initFragments() {

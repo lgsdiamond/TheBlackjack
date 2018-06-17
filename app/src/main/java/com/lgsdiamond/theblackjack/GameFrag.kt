@@ -333,11 +333,6 @@ class GameFrag : BjFragment() {
         doBindService()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        startService(ServiceAction.ROUND_READY)
-    }
-
     fun startService(action: ServiceAction) {
         val intent = Intent(gMainActivity.applicationContext, BjService::class.java)
         intent.`package` = PACKAGE_NAME
@@ -406,34 +401,34 @@ class GameFrag : BjFragment() {
     //====
     override fun initFragmentUI(view: View) {
         normalizeActionButtons()
-        btnContinue.setOnClickListener({ _: View ->
+        btnContinue.setOnClickListener { _: View ->
             continueRound()
-        })
+        }
 
-        btnPlaySurrender.setOnClickListener({ _: View ->
+        btnPlaySurrender.setOnClickListener { _: View ->
             normalizeActionButtons()
             startService(ServiceAction.ACTION_SURRENDER)
-        })
+        }
 
-        btnPlayStand.setOnClickListener({ _: View ->
+        btnPlayStand.setOnClickListener { _: View ->
             normalizeActionButtons()
             startService(ServiceAction.ACTION_STAND)
-        })
+        }
 
-        btnPlayHit.setOnClickListener({ _: View ->
+        btnPlayHit.setOnClickListener { _: View ->
             normalizeActionButtons()
             startService(ServiceAction.ACTION_HIT)
-        })
+        }
 
-        btnPlaySplit.setOnClickListener({ _: View ->
+        btnPlaySplit.setOnClickListener { _: View ->
             normalizeActionButtons()
             startService(ServiceAction.ACTION_SPLIT)
-        })
+        }
 
-        btnPlayDoubleDown.setOnClickListener({ _: View ->
+        btnPlayDoubleDown.setOnClickListener { _: View ->
             normalizeActionButtons()
             startService(ServiceAction.ACTION_DOUBLEDOWN)
-        })
+        }
 
         btnContinue.visibility = View.GONE
         layoutActions.visibility = View.GONE
@@ -614,25 +609,25 @@ class GameFrag : BjFragment() {
                 btnBetTwentyFive.isEnabled = table.boxBetPossible(position, 25.0f)
                 btnBetHundred.isEnabled = table.boxBetPossible(position, 100.0f)
 
-                btnBetOne.setOnClickListener({ v ->
+                btnBetOne.setOnClickListener { v ->
                     addInitialBetClicked(v, position, 1.0f)
-                })
-                btnBetFive.setOnClickListener({ v ->
+                }
+                btnBetFive.setOnClickListener { v ->
                     addInitialBetClicked(v, position, 5.0f)
-                })
-                btnBetTen.setOnClickListener({ v ->
+                }
+                btnBetTen.setOnClickListener { v ->
                     addInitialBetClicked(v, position, 10.0f)
-                })
-                btnBetTwentyFive.setOnClickListener({ v ->
+                }
+                btnBetTwentyFive.setOnClickListener { v ->
                     addInitialBetClicked(v, position, 25.0f)
-                })
-                btnBetHundred.setOnClickListener({ v ->
+                }
+                btnBetHundred.setOnClickListener { v ->
                     addInitialBetClicked(v, position, 100.0f)
-                })
+                }
 
-                btnCancelBet.setOnClickListener({ v ->
+                btnCancelBet.setOnClickListener { v ->
                     cancelBetClicked(v, position)
-                })
+                }
             }
 
             private fun showPlayerCardViews(pHand: PlayerHand) {
@@ -669,9 +664,9 @@ class GameFrag : BjFragment() {
                 val bet = box.bet
                 val player = box.player
 
-                txtBettter.setOnClickListener({ v: View ->
+                txtBetter.setOnClickListener { v: View ->
                     adjustBetter(v, box)
-                })
+                }
                 if (bet >= Table.tableRule.minBet) {
                     itemView.setBackgroundColor(0x6FFFFFFF)
                 } else {
@@ -696,9 +691,9 @@ class GameFrag : BjFragment() {
                     layoutChips.visibility = android.view.View.GONE
                 }
 
-                txtPlayerName.setOnClickListener({ v ->
+                txtPlayerName.setOnClickListener { v ->
                     changeBoxPlayer(v, position)
-                })
+                }
 
                 if (box.playerSeated) {
                     txtBetAmount.visibility = android.view.View.VISIBLE
@@ -723,7 +718,7 @@ class GameFrag : BjFragment() {
                 val player = pHand.player
                 val currentHand = table.dealer.currentHandIndex
 
-                txtBettter.setOnClickListener(null)
+                txtBetter.setOnClickListener(null)
 
                 showPlayerCardViews(pHand)
 
@@ -742,9 +737,9 @@ class GameFrag : BjFragment() {
                         }
                         checkInsured.visibility = android.view.View.VISIBLE
 
-                        checkInsured.setOnClickListener({ v ->
+                        checkInsured.setOnClickListener { v ->
                             insureCheckChanged(v as CheckBox, pHand, position)
-                        })
+                        }
                     }
                 } else {
                     checkInsured.setOnClickListener(null)

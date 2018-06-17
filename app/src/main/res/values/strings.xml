@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TheBlackjack</string>
     <string name="package_name">com.lgsdiamond.theblackjack</string>
+    <string name="author_email">gsdiamond@gmail.com</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
