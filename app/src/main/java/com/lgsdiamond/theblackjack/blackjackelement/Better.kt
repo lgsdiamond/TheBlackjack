@@ -9,10 +9,6 @@ abstract class Better {
     var prevResult: RoundResult = RoundResult.PENDING   // only PENDING, WIN, LOST, PUSH. no WIN_BJ
     var totalWin: Float = 0.0f
 
-    init {
-        reset()
-    }
-
     open fun reset() {
         skipRound = false
         prevBet = 0.0f

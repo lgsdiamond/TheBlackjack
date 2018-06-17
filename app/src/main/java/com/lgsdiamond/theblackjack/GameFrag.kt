@@ -335,7 +335,7 @@ class GameFrag : BjFragment() {
 
     fun startService(action: ServiceAction) {
         val intent = Intent(gMainActivity.applicationContext, BjService::class.java)
-        intent.`package` = PACKAGE_NAME
+        intent.`package` = gMainActivity.packageName
         intent.action = action.toString()
 
         bjService.startService(intent)

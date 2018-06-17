@@ -10,7 +10,7 @@ import kotlin.math.floor
 
 
 /**
- * Created by LgsDi on 2018-03-10.
+ * Created by lgsdiamond on 2018-03-10.
  */
 
 fun Float.toDollarString(): String {

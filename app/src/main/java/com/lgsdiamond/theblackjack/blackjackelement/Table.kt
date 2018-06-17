@@ -7,7 +7,7 @@ enum class Stage { PENDING, BETTING, INITIAL_DEAL, OFFER_INSURANCE, PEEK_HOLE,
 }
 
 /**
- * Created by LgsDi on 2018-03-10.
+ * Created by lgsdiamond on 2018-03-10.
  */
 class Table : ArrayList<Box>() {
 

@@ -1,7 +1,7 @@
 package com.lgsdiamond.theblackjack.blackjackelement
 
 /**
- * Created by LgsDi on 2018-03-10.
+ * Created by lgsdiamond on 2018-03-10.
  */
 enum class CardDealRule { DEAL_ONCE, DEAL_LATER }   // card dealing order
 

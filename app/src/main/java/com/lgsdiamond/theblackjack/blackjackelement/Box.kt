@@ -1,9 +1,10 @@
 package com.lgsdiamond.theblackjack.blackjackelement
 
-import com.lgsdiamond.theblackjack.*
+import com.lgsdiamond.theblackjack.toAllinBet
+import com.lgsdiamond.theblackjack.toValidBet
 
 /**
- * Created by LgsDi on 2018-03-10.
+ * Created by lgsdiamond on 2018-03-10.
  */
 
 class Box(val index: Int) : ArrayList<PlayerHand>() {
@@ -11,15 +12,11 @@ class Box(val index: Int) : ArrayList<PlayerHand>() {
     var better: Better = Table.ghostBetter
 
     val playerSeated: Boolean
-        get() {
-            return player != Table.ghostPlayer
-        }
+        get() = (player != Table.ghostPlayer)
 
     var bet: Float = 0.0f               // betting for current round
 
-    override fun toString(): String {
-        return "Box($index)"
-    }
+    override fun toString() = "Box($index)"
 
     fun readyRound() {
         clear()
@@ -40,20 +37,16 @@ class Box(val index: Int) : ArrayList<PlayerHand>() {
     }
 
     fun addInitialBet(betAmount: Float) {
-        if (playerSeated) {
-            player.takeOutBalance(betAmount)
-            bet += betAmount
-        } else {
-            "ERROR: Betting with no player".toToastShort()
-        }
+        require(playerSeated) { "ERROR: Betting with no player" }
+
+        player.takeOutBalance(betAmount)
+        bet += betAmount
     }
 
     fun cancelBet() {
-        if (playerSeated) {
-            player.putInBalance(bet)
-            bet = 0.0f
-        } else {
-            BjService.broadcast(ClientAction.PROGRESS_MESSAGE, "ERROR: Betting with no player") // TODO-error checking
-        }
+        require(playerSeated) { "ERROR: Betting with no player" }
+
+        player.putInBalance(bet)
+        bet = 0.0f
     }
 }

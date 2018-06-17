@@ -8,7 +8,7 @@ import android.view.View
 
 
 /**
- * Created by LgsDi on 2018-03-10.
+ * Created by lgsdiamond on 2018-03-10.
  */
 abstract class BjFragment : Fragment() {
     abstract var barTitle: String

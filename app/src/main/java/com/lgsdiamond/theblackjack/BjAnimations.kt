@@ -1,11 +1,41 @@
 package com.lgsdiamond.theblackjack
 
+import android.view.View
 import android.view.animation.*
 
 //=== Animations ====
 const val CARD_ANIMATION_DURATION = 300L
 
 enum class CardAnimation { NONE, DEALING, PEEKING, OPENING, DISCARDING }
+enum class BJAnimation { NONE, CARD_DEALING, CARD_PEEKING, CARD_OPENING, CARD_DISCARDING,
+    BTN_EMPHASIS
+}
+
+fun View.bjAnimation(animCode: BJAnimation) {
+    var anim: AnimationSet? = null
+    when (animCode) {
+        BJAnimation.CARD_DEALING -> {
+            anim = BjAnimUtility.sCardDealAnim
+        }
+        BJAnimation.CARD_PEEKING -> {
+            anim = BjAnimUtility.sCardDealAnim
+        }
+        BJAnimation.CARD_OPENING -> {
+            anim = BjAnimUtility.sCardDealAnim
+        }
+        BJAnimation.CARD_DISCARDING -> {
+            anim = BjAnimUtility.sCardDealAnim
+        }
+        BJAnimation.BTN_EMPHASIS -> {
+            anim = BjAnimUtility.sButtonEmphAnim
+        }
+        else -> {
+        }
+    }
+    if (anim != null) {
+        startAnimation(anim)
+    }
+}
 
 class BjAnimUtility {
     companion object {
@@ -15,7 +45,7 @@ class BjAnimUtility {
         val sScoreTextAnim: AnimationSet by lazy { newScoreTextAnimation() }
         val sButtonEmphAnim: AnimationSet by lazy { newButtonEmphAnimation() }
 
-        fun newCardDealAnimation(): AnimationSet {
+        private fun newCardDealAnimation(): AnimationSet {
             val anim = AnimationSet(true)
             val trans = TranslateAnimation(200.0f, 0.0f, 0.0f, 0.0f)
             val alpha = AlphaAnimation(0.0f, 1.0f)
@@ -31,7 +61,7 @@ class BjAnimUtility {
             return anim
         }
 
-        fun newCardPeekAnimation(): AnimationSet {
+        private fun newCardPeekAnimation(): AnimationSet {
             val anim = AnimationSet(true)
             val transA = TranslateAnimation(0.0f, 30.0f, 0.0f, 0.0f)
             val transB = TranslateAnimation(30.0f, 0.0f, 0.0f, 0.0f)
@@ -48,7 +78,7 @@ class BjAnimUtility {
             return anim
         }
 
-        fun newCardDiscardAnimation(): AnimationSet {
+        private fun newCardDiscardAnimation(): AnimationSet {
             val anim = AnimationSet(true)
             val alpha = AlphaAnimation(1.0f, 0.0f)
             val scale = ScaleAnimation(1.0f, 0.7f, 1.0f, 0.7f)
@@ -62,7 +92,7 @@ class BjAnimUtility {
             return anim
         }
 
-        fun newScoreTextAnimation(): AnimationSet {
+        private fun newScoreTextAnimation(): AnimationSet {
             val anim = AnimationSet(true)
             val alpha = AlphaAnimation(0.0f, 1.0f)
             val scale = ScaleAnimation(3.0f, 1.0f, 3.0f, 1.0f)
@@ -76,7 +106,7 @@ class BjAnimUtility {
             return anim
         }
 
-        fun newButtonEmphAnimation(): AnimationSet {
+        private fun newButtonEmphAnimation(): AnimationSet {
             val anim = AnimationSet(true)
             val scale = ScaleAnimation(1.3f, 1.0f, 1.3f, 1.0f,
                     Animation.RELATIVE_TO_PARENT, 0.5f, Animation.RELATIVE_TO_PARENT, 0.5f)
