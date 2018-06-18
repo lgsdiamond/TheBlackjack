@@ -36,9 +36,6 @@ class BjService : IntentService("Blackjack Service") {
             get() = this@BjService
     }
 
-    init {
-    }
-
     override fun onHandleIntent(intent: Intent?) {
         if (intent != null) {
             when (intent.action) {

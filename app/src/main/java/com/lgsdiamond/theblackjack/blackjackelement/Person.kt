@@ -115,7 +115,7 @@ class Dealer : Person("Dealer") {
 
         card.hidden = toHidden
         hand.addCard(card)
-
+        
         // UI
         val cardInfo = IntArray(5)
         if (hand is PlayerHand) {                               // player card info
