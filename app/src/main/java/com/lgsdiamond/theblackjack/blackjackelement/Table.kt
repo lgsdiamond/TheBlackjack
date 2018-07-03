@@ -15,7 +15,7 @@ class Table : ArrayList<Box>() {
     var currentStage: Stage = Stage.PENDING
 
     init {
-        for (i in 1..tableRule.numBoxes) {  // from one
+        for (i in 1..tableRule.numBoxes) {
             add(Box(i))
         }
     }
@@ -122,25 +122,23 @@ class Table : ArrayList<Box>() {
     }
 
     fun doStageDealEachHand() {
-        currentStage = Stage.DEAL_EACH_HAND
-        BjService.broadcast(ClientAction.STAGE_START, currentStage)
-
-        var needDeal = false
-        for (hand in dealer.playerHands) {
-            if (!hand.hasDealDone) {
-                needDeal = true
-                break
-            }
-        }
-
-        if (needDeal) {
+        if (dealer.playerHands.any { it.hasDealDone }) {
+            stageStart(Stage.DEAL_EACH_HAND)
             dealer.currentHandIndex = 0
             dealer.dealEachPlayerHand()
+            stageEnd(Stage.DEAL_EACH_HAND)
         } else {
-            // move to next stage, skipping deal_each_hand
-            BjService.broadcast(ClientAction.STAGE_END, currentStage)
             doStageDealDealer()
         }
+    }
+
+    private fun stageStart(stage: Stage) {
+        currentStage = stage
+        BjService.broadcast(ClientAction.STAGE_START, stage)
+    }
+
+    private fun stageEnd(stage: Stage) {
+        BjService.broadcast(ClientAction.STAGE_END, stage)
     }
 
     fun doStageDealDealer() {

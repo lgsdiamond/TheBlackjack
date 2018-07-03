@@ -115,7 +115,7 @@ class Dealer : Person("Dealer") {
 
         card.hidden = toHidden
         hand.addCard(card)
-        
+
         // UI
         val cardInfo = IntArray(5)
         if (hand is PlayerHand) {                               // player card info
@@ -235,40 +235,30 @@ class Dealer : Person("Dealer") {
     }
 
     fun dealEachPlayerHand() {
-        if (currentHandIndex == NO_CURRENT_HAND) {
-            BjService.broadcast(ClientAction.STAGE_END, Stage.DEAL_EACH_HAND)
-            dealDealerHand()
-        } else {
-            val pHand = playerHands[currentHandIndex]
-
-            while (pHand.size < 2) {        // it could be just one card for cardDealRule AT_LATER
-                dealOneCard(pHand)
+        when (currentHandIndex) {
+            NO_CURRENT_HAND -> {
+                BjService.broadcast(ClientAction.STAGE_END, Stage.DEAL_EACH_HAND)
+                dealDealerHand()
             }
+            else -> {
+                val pHand = playerHands[currentHandIndex]
 
-            if (pHand.hasDealDone) {
-                dealNextPlayerHand()
-            } else {
-                BjService.broadcast(ClientAction.DEAL_EACH_HAND, currentHandIndex)
+                while (pHand.size < 2) {        // it could be just one card for cardDealRule AT_LATER
+                    dealOneCard(pHand)
+                }
+
+                if (pHand.hasDealDone) {
+                    dealNextPlayerHand()
+                } else {
+                    BjService.broadcast(ClientAction.DEAL_EACH_HAND, currentHandIndex)
+                }
             }
         }
     }
 
     fun dealDealerHand() {
-        var hasInsured = false
-        for (pHand in playerHands) {
-            if (pHand.hasInsured) {
-                hasInsured = true
-                break
-            }
-        }
-
-        var hasPending = false
-        for (pHand in playerHands) {
-            if (pHand.roundResult == RoundResult.PENDING) {
-                hasPending = true
-                break
-            }
-        }
+        val hasInsured = playerHands.any { it.hasInsured }
+        val hasPending = playerHands.any { it.roundResult == RoundResult.PENDING }
 
         // treat insured or pending players
         if (hasInsured || hasPending) {
@@ -280,8 +270,6 @@ class Dealer : Person("Dealer") {
                 dealOneCard(hand, false, delay++)       // deal one open-card
             } else if (hand.hiddenSecondCard) {       // second card could be hidden, for DEAL_ONCE
                 hand.openSecondCard()
-
-                // UI
                 BjService.broadcast(ClientAction.OPEN_HIDDEN_DEALER_CARD, hand[1])
             }
 
@@ -297,12 +285,13 @@ class Dealer : Person("Dealer") {
                     }
                 }
             }
+            BjService.broadcast(ClientAction.STAGE_END, Stage.DEAL_DEALER)
         }
     }
 
     fun payHands() {
         currentHandIndex = NO_CURRENT_HAND
-        
+
         for ((handIndex, pHand) in playerHands.iterator().withIndex()) {
 
             // treat insured hands first

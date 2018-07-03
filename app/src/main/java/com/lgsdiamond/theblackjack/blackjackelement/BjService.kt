@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager
 import com.lgsdiamond.theblackjack.ClientAction
 import com.lgsdiamond.theblackjack.gContext
 import com.lgsdiamond.theblackjack.toToastShort
+import kotlin.math.max
 
 /**
  * Created by lgsdiamond on 2018-03-14.
@@ -121,7 +122,7 @@ class BjService : IntentService("Blackjack Service") {
         }
 
         fun notifyDelayUI(delay: Long = 0L) {
-            delayUI = delay
+            delayUI = max(delayUI, delay)
         }
 
         fun clearDelayUI() {

@@ -2,6 +2,7 @@ package com.lgsdiamond.theblackjack
 
 import android.view.View
 import android.view.animation.*
+import com.lgsdiamond.theblackjack.blackjackelement.BjService
 
 //=== Animations ====
 const val CARD_ANIMATION_DURATION = 300L
@@ -11,7 +12,7 @@ enum class BJAnimation { NONE, CARD_DEALING, CARD_PEEKING, CARD_OPENING, CARD_DI
     BTN_EMPHASIS
 }
 
-fun View.bjAnimation(animCode: BJAnimation) {
+fun View.bjAnimation(animCode: BJAnimation, delay: Long = 0L) {
     var anim: AnimationSet? = null
     when (animCode) {
         BJAnimation.CARD_DEALING -> {
@@ -33,6 +34,17 @@ fun View.bjAnimation(animCode: BJAnimation) {
         }
     }
     if (anim != null) {
+        anim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                BjService.notifyDelayUI(delay)
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+                BjService.clearDelayUI()
+            }
+        })
+
         startAnimation(anim)
     }
 }
